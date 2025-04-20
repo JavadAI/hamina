@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title class="tt">حامد و مینا</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="index.css">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="./img/icon.png" type="image/x-icon">
+  <style>
+    /* همون استایل‌هات اینجا هستن، حذفش نکردم */
+    /* ... (استایل‌ها عین همون باقی می‌مونن) ... */
+  </style>
+</head>
+<body>
+  
+  <div id="scroll-down">
+    <svg width="36" height="36" viewBox="0 0 24 24" fill="#00b894" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 21L3 9H9V3H15V9H21L12 21Z"/>
+    </svg>
+    <div>برو پایین تر</div>
+  </div>
+
+  <script>
+    document.getElementById("scroll-down").addEventListener("click", function () {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+      this.style.display = "none";
+    });
+  </script>
+
+  <div class="card">
+    <div class="status">دعوت نامه مراسم عروسی</div>
+
+    <div class="address-box">
+      <strong>حامد و مینا</strong> <br>
+      <strong></strong>از بلندای نگاه تو فقط پروازه پروازه پرواز<br>
+      <strong></strong>نه محضر لازمه نه حلقه خُب<br>
+      <strong></strong>اما تویی محرم،تویی همدم،تویی همراز<br>
+      <strong>شیرزاد و صفری</strong><br>
+      <strong>_______________________</strong><br>
+      <strong>مکان برگزاری مراسم:</strong><br>
+      <!-- <strong>مکان برگزاری مراسم:</strong><br>
+      <div>اصفهان،نجف آباد،کمربندی جنوبی</div><br> -->
+      <strong></strong>اصفهان،نجف آباد،کمربندی جنوبی<br>
+
+      <strong>تالار قصر</strong><br>
+      <strong>_______________________</strong><br>
+      <strong>تاریخ مراسم:</strong><br>
+      <strong></strong>مراسم جمعه مورخ 1404/03/02<br>
+      <strong>ساعت ورود:</strong> 19:30تا23:00
+    </div>
+
+    <div class="map-buttons">
+      <a href="https://nshn.ir/_bZ9pPPxMXR6" target="_blank">
+        <img src="./img/neshan.png" alt="نشان" style="width: 24px; vertical-align: middle; margin-left: 8px;">
+        مسیر‌یابی با نشان
+      </a>
+      <a href="https://maps.app.goo.gl/Xeqy1UsKhUUzWTdx6?g_st=com.google.maps.preview.copy" target="_blank">
+        <img src="./img/google map.png" alt="گوگل مپ" style="width: 24px; vertical-align: middle; margin-left: 8px;">
+        مسیر‌یابی با گوگل مپ
+      </a>
+    </div>
+
+    <div class="footer">مشتاق دیدارتون 😊</div>
+
+    <div id="countdown-box">
+      <div id="headline" style="font-weight: bold; font-size: 20px; margin-bottom: 10px;">🗓 تا روز مراسن</div>
+      <div id="countdown-grid" style="display: flex; justify-content: center; gap: 15px; align-items: end;">
+        <div class="count-box" id="day-box">
+          <div class="label">روز</div>
+          <div id="days" class="value">0</div>
+        </div>
+        <div class="count-box">
+          <div class="label">ساعت</div>
+          <div id="hours" class="value">0</div>
+        </div>
+        <div class="count-box">
+          <div class="label">دقیقه</div>
+          <div id="minutes" class="value">0</div>
+        </div>
+        <div class="count-box">
+          <div class="label">ثانیه</div>
+          <div id="seconds" class="value">0</div>
+        </div>
+      </div>
+      <div id="final-msg" style="margin-top: 20px; font-size: 18px;"></div>
+    </div>
+  </div>
+
+  <script>
+    const targetDate = new Date("2025-05-23T19:30:00");
+
+    function updateValueWithPulse(id, newValue) {
+      const el = document.getElementById(id);
+      if (el.innerText !== String(newValue)) {
+        el.innerText = newValue;
+        el.classList.remove("pulse");
+        void el.offsetWidth;
+        el.classList.add("pulse");
+      }
+    }
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate - now;
+
+      const headline = document.getElementById("headline");
+      const dayBox = document.getElementById("day-box");
+
+      if (diff <= 0) {
+        document.getElementById("final-msg").innerText = "🎉 شروع مراسم!";
+        document.getElementById("countdown-grid").style.display = "none";
+        return;
+      }
+
+      const totalSeconds = Math.floor(diff / 1000);
+      const days = Math.floor(totalSeconds / (60 * 60 * 24));
+      const hours = Math.floor((totalSeconds % (60 * 60 * 24)) / (60 * 60));
+      const minutes = Math.floor((totalSeconds % (60 * 60)) / 60);
+      const seconds = totalSeconds % 60;
+
+      if (days === 0) {
+        headline.innerText = "⏰ تا شروع مراسم";
+        dayBox.style.display = "none";
+      } else {
+        headline.innerText = "🗓 تا روز مراسم";
+        dayBox.style.display = "block";
+      }
+
+      updateValueWithPulse("days", days);
+      updateValueWithPulse("hours", hours);
+      updateValueWithPulse("minutes", minutes);
+      updateValueWithPulse("seconds", seconds);
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+<!-- -------------------------------------------------------------- -->
+  <!-- ------------------------------------------- -->
+  <style>
+    /* تنظیمات اولیه برای موزیک */
+    audio {
+        opacity: 0; /* ابتدا موزیک پنهان است */
+    }
+</style>
+</head>
+<body>
+
+<!-- فایل صوتی که به صورت خودکار پخش می‌شود و صدا کاهش یافته است -->
+<audio id="audioPlayer" loop autoplay>
+<source src="./music.mp3" type="audio/mp3">
+مرورگر شما از تگ audio پشتیبانی نمی‌کند.
+</audio>
+
+<script>
+// انتخاب عنصر صوتی
+var audio = document.getElementById('audioPlayer');
+
+// تنظیم شروع نرم (Fade-in)
+audio.volume = 0;  // صدای اولیه صفر است
+audio.play(); // شروع پخش موزیک
+
+// ایجاد افکت شروع نرم
+var fadeInInterval = setInterval(function() {
+if (audio.volume < 0.2) { // حجم صدا رو به تدریج افزایش می‌دهیم
+    audio.volume += 0.01;
+} else {
+    clearInterval(fadeInInterval); // وقتی به حجم مورد نظر رسید، این افکت متوقف می‌شود
+}
+}, 50);
+
+// ایجاد افکت پایان نرم (Fade-out) هنگام پایان موزیک
+audio.addEventListener('ended', function() {
+var fadeOutInterval = setInterval(function() {
+    if (audio.volume > 0) { // اگر حجم صدا بیشتر از صفر بود، کم می‌کنیم
+        audio.volume -= 0.90;
+    } else {
+        clearInterval(fadeOutInterval); // وقتی صدا به صفر رسید، افکت تمام می‌شود
+        audio.pause(); // موزیک متوقف می‌شود
+    }
+}, 50);
+});
+</script>
+
+
+</body>
+</html>
